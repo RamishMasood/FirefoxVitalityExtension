@@ -6,6 +6,8 @@ import URLTools from "./components/features/URLTools";
 import TextTools from "./components/features/TextTools";
 import DevTools from "./components/features/DevTools";
 import BookmarkTools from "./components/features/BookmarkTools";
+import PrivacyTools from "./components/features/PrivacyTools";
+import VideoTools from "./components/features/VideoTools";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { MoonIcon, SunIcon } from "lucide-react";
@@ -40,11 +42,13 @@ function App() {
           </div>
 
           <Tabs defaultValue="url" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="url">URL</TabsTrigger>
               <TabsTrigger value="text">Text</TabsTrigger>
               <TabsTrigger value="dev">Dev</TabsTrigger>
               <TabsTrigger value="bookmarks">Bookmarks</TabsTrigger>
+              <TabsTrigger value="privacy">Privacy</TabsTrigger>
+              <TabsTrigger value="video">Video</TabsTrigger>
             </TabsList>
             <TabsContent value="url">
               <URLTools />
@@ -57,6 +61,12 @@ function App() {
             </TabsContent>
             <TabsContent value="bookmarks">
               <BookmarkTools />
+            </TabsContent>
+            <TabsContent value="privacy">
+              <PrivacyTools />
+            </TabsContent>
+            <TabsContent value="video">
+              <VideoTools />
             </TabsContent>
           </Tabs>
         </div>
