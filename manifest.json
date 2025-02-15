@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "OmniTools",
+  "version": "1.0.0",
+  "description": "A multifunctional utility tool for Firefox",
+  "icons": {
+    "48": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAydjIwTTIgMTJoMjAiLz48L3N2Zz4="
+  },
+  "permissions": [
+    "storage",
+    "bookmarks",
+    "tabs",
+    "contextMenus",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["src/pages/Background.tsx"]
+  },
+  "action": {
+    "default_popup": "src/pages/Popup.tsx",
+    "default_title": "OmniTools"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "omnitools@firefoxextension.com"
+    }
+  }
+}
