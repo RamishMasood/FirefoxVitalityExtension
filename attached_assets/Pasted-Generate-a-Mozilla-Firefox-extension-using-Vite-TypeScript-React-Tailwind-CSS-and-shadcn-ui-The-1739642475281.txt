@@ -1,0 +1,116 @@
+Generate a Mozilla Firefox extension using Vite, TypeScript, React, Tailwind CSS, and shadcn-ui. The extension, named OmniTools, should be a multifunctional utility tool. It must be lightweight, use only the user's local storage (browser.storage.local), and avoid external databases. The extension must work fully in Firefox, following Mozilla's WebExtensions API.
+
+The extension should provide multiple essential tools, each accessible through an intuitive popup interface with minimal UI design using shadcn-ui. It should also feature a right-click context menu for quick actions and maintain local settings for customization.
+
+Technologies to Use:
+Vite – Fast build tool
+TypeScript – Type safety and maintainability
+React – Component-based UI
+Tailwind CSS – Styling framework
+shadcn-ui – Modern UI components
+browser.storage.local – Local storage API for saving data
+🔹 Features & Functionalities:
+1️⃣ Smart URL Shortener & QR Code Generator
+One-click URL shortener
+QR code generation for any link
+Copy & share functionality
+Local history of previously shortened links
+2️⃣ Advanced Writing & Formatting Toolkit
+Auto-correct & grammar checker
+Text formatter (Markdown, HTML, plain text)
+Quick word counter
+Copy-paste history with local storage
+3️⃣ Multi-Functional Link & Bookmark Manager
+One-click bookmarking with tag-based categorization
+"Read later" mode for saved links
+Auto broken link checker
+Screenshot preview of saved bookmarks
+4️⃣ All-in-One Privacy & Cleanup Manager
+Auto-clear browsing history on schedule
+Ad & tracker cleaner (removes known trackers)
+One-click cache cleaner
+Cookie manager with per-site controls
+5️⃣ Web Developer & Designer Toolkit
+Color picker for webpage elements
+CSS live editor with instant changes
+Font & icon inspector
+JSON formatter & viewer
+Regex debugger for testing patterns
+6️⃣ Personalized News & RSS Feed Manager
+Custom RSS feed integration
+Offline article saving for later reading
+Reader mode for distraction-free reading
+Auto dark mode for news sites
+7️⃣ Smart Form Autofill & Password Helper
+One-click auto-fill for web forms
+Secure password management (local storage only)
+Secure notes storage for sensitive text
+8️⃣ CodeMate – Quick Coding & Snippet Toolkit
+Code snippet manager for saving reusable code
+Syntax highlighter & formatter
+GitHub Gist uploader for easy sharing
+9️⃣ Floating Video Player (PiP Plus)
+Watch any video in Picture-in-Picture mode
+Resize & move anywhere on screen
+Custom controls for play/pause/mute
+🔟 Batch Image Downloader
+Detect and list all images on a webpage
+Select specific images or bulk download
+Filter images by size & type before downloading
+1️⃣1️⃣ Smart Auto-Refresher for Tabs
+Auto-refresh tabs at a custom interval
+Prevents session logouts for online platforms
+Stop auto-refresh when user is active on the page
+1️⃣2️⃣ Multi-Account Login Switcher
+Quickly switch between multiple logins on the same website
+Saves cookies & session data locally for fast switching
+1️⃣3️⃣ Ad Highlighter Instead of Blocker
+Instead of blocking, highlights ads in red for user awareness
+Toggle ON/OFF in settings
+🔹 Required Implementations:
+1️⃣ Manifest.json (Firefox-Compatible)
+Generate a manifest.json file with:
+
+Manifest version 3
+Permissions: storage, bookmarks, downloads, tabs, cookies, browsingData, contextMenus
+Host permissions: <all_urls>
+Service worker: src/pages/Background.tsx
+Popup page: src/pages/Popup.tsx
+Firefox-specific settings:
+json
+Copy
+Edit
+"browser_specific_settings": {
+  "gecko": {
+    "id": "omnitools@firefoxextension.com"
+  }
+}
+2️⃣ Local Storage Instead of Database
+Use browser.storage.local for all user data:
+
+typescript
+Copy
+Edit
+browser.storage.local.set({ key: "value" }).then(() => {
+  console.log("Data saved!");
+});
+
+browser.storage.local.get("key").then((result) => {
+  console.log("Data fetched:", result.key);
+});
+3️⃣ Context Menu for Quick Actions
+Add right-click context menu with quick actions for:
+
+"Shorten this URL"
+"Download all images"
+"Open in floating video player"
+"Switch accounts"
+"Clear browsing history"
+4️⃣ UI & Design Requirements
+Clean and minimal UI using shadcn-ui
+Dark & Light mode toggle
+Intuitive navigation for accessing tools
+Keyboard shortcuts for quick tool activation
+Tailwind CSS for styling and responsiveness
+
+Ensure the entire extension is fully functional, Firefox-compatible, and requires no backend/database. It should be optimized for speed using Vite, have clean and modular TypeScript code, and be ready to build and test immediately after generation.
