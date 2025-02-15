@@ -8,6 +8,8 @@ import DevTools from "./components/features/DevTools";
 import BookmarkTools from "./components/features/BookmarkTools";
 import PrivacyTools from "./components/features/PrivacyTools";
 import VideoTools from "./components/features/VideoTools";
+import ImageTools from "./components/features/ImageTools";
+import AutoRefreshTools from "./components/features/AutoRefreshTools";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { MoonIcon, SunIcon } from "lucide-react";
@@ -42,14 +44,17 @@ function App() {
           </div>
 
           <Tabs defaultValue="url" className="w-full">
-            <TabsList className="grid w-full grid-cols-6">
+            <TabsList className="grid w-full grid-cols-4 gap-1">
               <TabsTrigger value="url">URL</TabsTrigger>
               <TabsTrigger value="text">Text</TabsTrigger>
               <TabsTrigger value="dev">Dev</TabsTrigger>
               <TabsTrigger value="bookmarks">Bookmarks</TabsTrigger>
               <TabsTrigger value="privacy">Privacy</TabsTrigger>
               <TabsTrigger value="video">Video</TabsTrigger>
+              <TabsTrigger value="images">Images</TabsTrigger>
+              <TabsTrigger value="refresh">Auto-Refresh</TabsTrigger>
             </TabsList>
+
             <TabsContent value="url">
               <URLTools />
             </TabsContent>
@@ -67,6 +72,12 @@ function App() {
             </TabsContent>
             <TabsContent value="video">
               <VideoTools />
+            </TabsContent>
+            <TabsContent value="images">
+              <ImageTools />
+            </TabsContent>
+            <TabsContent value="refresh">
+              <AutoRefreshTools />
             </TabsContent>
           </Tabs>
         </div>
