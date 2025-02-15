@@ -10,6 +10,10 @@ import PrivacyTools from "./components/features/PrivacyTools";
 import VideoTools from "./components/features/VideoTools";
 import ImageTools from "./components/features/ImageTools";
 import AutoRefreshTools from "./components/features/AutoRefreshTools";
+import FormTools from "./components/features/FormTools";
+import CodeTools from "./components/features/CodeTools";
+import RSSTools from "./components/features/RSSTools";
+import AdTools from "./components/features/AdTools";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { MoonIcon, SunIcon } from "lucide-react";
@@ -53,6 +57,10 @@ function App() {
               <TabsTrigger value="video">Video</TabsTrigger>
               <TabsTrigger value="images">Images</TabsTrigger>
               <TabsTrigger value="refresh">Auto-Refresh</TabsTrigger>
+              <TabsTrigger value="form">Forms</TabsTrigger>
+              <TabsTrigger value="code">Code</TabsTrigger>
+              <TabsTrigger value="rss">RSS</TabsTrigger>
+              <TabsTrigger value="ads">Ads</TabsTrigger>
             </TabsList>
 
             <TabsContent value="url">
@@ -78,6 +86,18 @@ function App() {
             </TabsContent>
             <TabsContent value="refresh">
               <AutoRefreshTools />
+            </TabsContent>
+            <TabsContent value="form">
+              <FormTools />
+            </TabsContent>
+            <TabsContent value="code">
+              <CodeTools />
+            </TabsContent>
+            <TabsContent value="rss">
+              <RSSTools />
+            </TabsContent>
+            <TabsContent value="ads">
+              <AdTools />
             </TabsContent>
           </Tabs>
         </div>
