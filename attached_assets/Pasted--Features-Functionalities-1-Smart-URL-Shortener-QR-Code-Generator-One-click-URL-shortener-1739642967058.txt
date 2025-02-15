@@ -1,0 +1,58 @@
+🔹 Features & Functionalities:
+1️⃣ Smart URL Shortener & QR Code Generator
+One-click URL shortener
+QR code generation for any link
+Copy & share functionality
+Local history of previously shortened links
+2️⃣ Advanced Writing & Formatting Toolkit
+Auto-correct & grammar checker
+Text formatter (Markdown, HTML, plain text)
+Quick word counter
+Copy-paste history with local storage
+3️⃣ Multi-Functional Link & Bookmark Manager
+One-click bookmarking with tag-based categorization
+"Read later" mode for saved links
+Auto broken link checker
+Screenshot preview of saved bookmarks
+4️⃣ All-in-One Privacy & Cleanup Manager
+Auto-clear browsing history on schedule
+Ad & tracker cleaner (removes known trackers)
+One-click cache cleaner
+Cookie manager with per-site controls
+5️⃣ Web Developer & Designer Toolkit
+Color picker for webpage elements
+CSS live editor with instant changes
+Font & icon inspector
+JSON formatter & viewer
+Regex debugger for testing patterns
+6️⃣ Personalized News & RSS Feed Manager
+Custom RSS feed integration
+Offline article saving for later reading
+Reader mode for distraction-free reading
+Auto dark mode for news sites
+7️⃣ Smart Form Autofill & Password Helper
+One-click auto-fill for web forms
+Secure password management (local storage only)
+Secure notes storage for sensitive text
+8️⃣ CodeMate – Quick Coding & Snippet Toolkit
+Code snippet manager for saving reusable code
+Syntax highlighter & formatter
+GitHub Gist uploader for easy sharing
+9️⃣ Floating Video Player (PiP Plus)
+Watch any video in Picture-in-Picture mode
+Resize & move anywhere on screen
+Custom controls for play/pause/mute
+🔟 Batch Image Downloader
+Detect and list all images on a webpage
+Select specific images or bulk download
+Filter images by size & type before downloading
+1️⃣1️⃣ Smart Auto-Refresher for Tabs
+Auto-refresh tabs at a custom interval
+Prevents session logouts for online platforms
+Stop auto-refresh when user is active on the page
+1️⃣2️⃣ Multi-Account Login Switcher
+Quickly switch between multiple logins on the same website
+Saves cookies & session data locally for fast switching
+1️⃣3️⃣ Ad Highlighter Instead of Blocker
+Instead of blocking, highlights ads in red for user awareness
+Toggle ON/OFF in settings
