@@ -5,15 +5,11 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 try {
-  // First run the Vite build
-  console.log('Building the application...');
-  execSync('npm run build', { stdio: 'inherit' });
-
-  // Then build the extension
+  // Build the Firefox extension using web-ext
   console.log('\nBuilding the Firefox extension...');
-  execSync('node scripts/build-extension.js', { stdio: 'inherit' });
+  execSync('node scripts/build-web-ext.js', { stdio: 'inherit' });
 
-  console.log('\nBuild completed successfully! The extension is ready in dist/extension');
+  console.log('\nBuild completed successfully! The extension package is ready in dist/web-ext-artifacts');
 } catch (error) {
   console.error('Build failed:', error);
   process.exit(1);

@@ -6,28 +6,31 @@ import { build } from 'esbuild';
 import sharp from 'sharp';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(__filename);
 
 // Function to generate extension icons
 async function generateIcons(extensionDir) {
   try {
     const iconSizes = [48, 96];
     const iconsDir = path.resolve(extensionDir, 'icons');
+
+    // Ensure icons directory exists
     await fsPromises.mkdir(iconsDir, { recursive: true });
+    console.log('Created icons directory:', iconsDir);
 
-    console.log('Generating icons in:', iconsDir);
-
-    // Generate icons using SVG template
+    // Generate icons using SVG template with a more visible design
     const iconSvg = `
       <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="96" height="96" rx="20" fill="#4F46E5"/>
-        <path d="M28 48h40M48 28v40" stroke="white" stroke-width="6" stroke-linecap="round"/>
+        <path d="M28 48h40M48 28v40" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="48" cy="48" r="32" stroke="white" stroke-width="4" stroke-opacity="0.5"/>
       </svg>
     `;
 
     // Generate different icon sizes
     for (const size of iconSizes) {
       const outputPath = path.resolve(iconsDir, `icon-${size}.png`);
+      console.log(`Generating icon size ${size}x${size}...`);
 
       try {
         const pngBuffer = await sharp(Buffer.from(iconSvg))
@@ -36,7 +39,7 @@ async function generateIcons(extensionDir) {
           .toBuffer();
 
         await fsPromises.writeFile(outputPath, pngBuffer);
-        console.log(`Generated icon: ${outputPath}`);
+        console.log(`Successfully generated icon: ${outputPath}`);
       } catch (error) {
         console.error(`Error generating icon size ${size}:`, error);
         throw error;
@@ -45,6 +48,8 @@ async function generateIcons(extensionDir) {
 
     // Verify icons were created
     const files = await fsPromises.readdir(iconsDir);
+    console.log('Generated icons:', files);
+
     if (files.length !== iconSizes.length) {
       throw new Error(`Expected ${iconSizes.length} icons but found ${files.length}`);
     }
@@ -56,18 +61,22 @@ async function generateIcons(extensionDir) {
 
 async function buildExtension() {
   try {
-    console.log('Starting extension build...');
+    console.log('Starting extension build process...');
     const distDir = path.resolve(__dirname, '../dist');
     const extensionDir = path.resolve(distDir, 'extension');
+    const publicDir = path.resolve(distDir, 'public');
 
-    // Clean the extension directory
+    // Clean and create extension directory
+    console.log('Cleaning extension directory...');
     await fsPromises.rm(extensionDir, { recursive: true, force: true });
     await fsPromises.mkdir(extensionDir, { recursive: true });
 
-    // Generate icons
+    // Generate icons first
+    console.log('Generating extension icons...');
     await generateIcons(extensionDir);
 
     // Copy and update manifest.json
+    console.log('Copying and updating manifest.json...');
     const manifestPath = path.resolve(__dirname, '../manifest.json');
     const manifest = JSON.parse(await fsPromises.readFile(manifestPath, 'utf-8'));
 
@@ -86,6 +95,7 @@ async function buildExtension() {
     );
 
     // Build background script
+    console.log('Building background script...');
     await build({
       entryPoints: [path.resolve(__dirname, '../client/src/pages/Background.tsx')],
       bundle: true,
@@ -98,6 +108,7 @@ async function buildExtension() {
     });
 
     // Build content script
+    console.log('Building content script...');
     await build({
       entryPoints: [path.resolve(__dirname, '../client/src/content.ts')],
       bundle: true,
@@ -110,15 +121,31 @@ async function buildExtension() {
     });
 
     // Copy Vite build files
-    const viteDistDir = path.resolve(distDir, 'public');
-    if (fs.existsSync(viteDistDir)) {
-      await fsPromises.cp(viteDistDir, extensionDir, { recursive: true });
+    console.log('Copying Vite build files...');
+    if (fs.existsSync(publicDir)) {
+      await fsPromises.cp(publicDir, extensionDir, { recursive: true });
+    } else {
+      throw new Error('Vite build files not found. Make sure to run vite build first.');
+    }
+
+    // Verify all required files exist
+    const requiredFiles = ['manifest.json', 'background.js', 'content.js', 'index.html'];
+    const missingFiles = [];
+
+    for (const file of requiredFiles) {
+      if (!fs.existsSync(path.resolve(extensionDir, file))) {
+        missingFiles.push(file);
+      }
+    }
+
+    if (missingFiles.length > 0) {
+      throw new Error(`Missing required files: ${missingFiles.join(', ')}`);
     }
 
     console.log('Extension build completed successfully!');
     console.log('Extension files are in:', extensionDir);
 
-    // List generated files
+    // List all generated files
     const files = await fsPromises.readdir(extensionDir);
     console.log('Generated files:', files);
   } catch (error) {
