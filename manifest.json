@@ -1,10 +1,11 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "OmniTools",
   "version": "1.0.0",
-  "description": "A multifunctional utility tool for Firefox",
+  "description": "A comprehensive utility toolkit for Firefox",
   "icons": {
-    "48": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAydjIwTTIgMTJoMjAiLz48L3N2Zz4="
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
   },
   "permissions": [
     "storage",
@@ -12,18 +13,16 @@
     "tabs",
     "contextMenus",
     "clipboardWrite",
-    "scripting",
+    "<all_urls>",
     "downloads",
     "cookies",
     "browsingData",
     "notifications",
     "alarms"
   ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "content_scripts": [
     {
@@ -31,17 +30,18 @@
       "js": ["content.js"]
     }
   ],
-  "action": {
+  "browser_action": {
     "default_popup": "index.html",
-    "default_title": "OmniTools"
+    "default_title": "OmniTools",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    }
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "omnitools@firefoxextension.com",
-      "strict_min_version": "109.0"
+      "id": "omnitools@firefox.extension",
+      "strict_min_version": "57.0"
     }
-  },
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
   }
 }
