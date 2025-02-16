@@ -11,21 +11,37 @@
     "bookmarks",
     "tabs",
     "contextMenus",
-    "clipboardWrite"
+    "clipboardWrite",
+    "scripting",
+    "downloads",
+    "cookies",
+    "browsingData",
+    "notifications",
+    "alarms"
   ],
   "host_permissions": [
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["src/pages/Background.tsx"]
+    "scripts": ["background.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
   "action": {
-    "default_popup": "src/pages/Popup.tsx",
+    "default_popup": "index.html",
     "default_title": "OmniTools"
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "omnitools@firefoxextension.com"
+      "id": "omnitools@firefoxextension.com",
+      "strict_min_version": "109.0"
     }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
   }
 }

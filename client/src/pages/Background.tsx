@@ -13,16 +13,40 @@ browser.runtime.onMessage.addListener((
   switch (message.type) {
     case "SHORTEN_URL":
       if (message.url) {
-        // Handle URL shortening
+        // URL shortening logic
+        browser.tabs.sendMessage(sender.tab!.id!, {
+          type: "URL_SHORTENED",
+          shortUrl: `https://short.url/${btoa(message.url).slice(0, 8)}`
+        });
       }
       break;
     case "SAVE_BOOKMARK":
       if (message.url && message.title) {
-        // Handle bookmark saving
+        browser.bookmarks.create({
+          title: message.title,
+          url: message.url
+        });
+      }
+      break;
+    case "AUTO_REFRESH":
+      // Handle auto-refresh requests
+      if (message.url) {
+        const tabId = sender.tab!.id!;
+        browser.alarms.create(`refresh_${tabId}`, {
+          periodInMinutes: 1
+        });
       }
       break;
     default:
       break;
+  }
+});
+
+// Handle alarms for auto-refresh
+browser.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name.startsWith('refresh_')) {
+    const tabId = parseInt(alarm.name.split('_')[1]);
+    browser.tabs.reload(tabId);
   }
 });
 
