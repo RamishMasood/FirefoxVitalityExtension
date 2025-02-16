@@ -1,4 +1,3 @@
-
 import { execSync } from 'child_process';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -13,6 +12,10 @@ async function buildWebExt() {
   try {
     console.log('Starting Firefox extension build process...');
     
+    // Build the Vite app first
+    console.log('Building Vite application...');
+    execSync('npm run build', { stdio: 'inherit' });
+
     const distDir = path.resolve(__dirname, '../dist');
     const extensionDir = path.resolve(distDir, 'firefox-ext');
     const publicDir = path.resolve(distDir, 'public');
